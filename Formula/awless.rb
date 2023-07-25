@@ -9,7 +9,8 @@ class Awless < Formula
 
   bottle do
     root_url "https://github.com/wallix/homebrew-awless/releases/download/#{version}"
-    sha256 "dbd1e5f4afd1de6fe00372bd8b6fffa9a448bbf461019094a5061b1b96924096" => :sierra
+    sha256 cellar: :any, big_sur: "dbd1e5f4afd1de6fe00372bd8b6fffa9a448bbf461019094a5061b1b96924096"
+    sha256 cellar: :any, ventura: "dbd1e5f4afd1de6fe00372bd8b6fffa9a448bbf461019094a5061b1b96924096"
   end
 
   depends_on "go" => :build
