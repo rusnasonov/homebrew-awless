@@ -9,7 +9,6 @@ class Awless < Formula
 
   bottle do
     root_url "https://github.com/wallix/homebrew-awless/releases/download/#{version}"
-    cellar :any_skip_relocation
     sha256 "dbd1e5f4afd1de6fe00372bd8b6fffa9a448bbf461019094a5061b1b96924096" => :sierra
   end
 
