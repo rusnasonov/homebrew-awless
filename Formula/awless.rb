@@ -25,7 +25,6 @@ class Awless < Formula
     # Install zsh completion
     output = Utils.popen_read("#{bin}/awless completion zsh")
     (zsh_completion/"_awless").write output
-    end
   end
 
   def caveats
