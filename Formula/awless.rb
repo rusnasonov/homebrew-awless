@@ -16,23 +16,15 @@ class Awless < Formula
   depends_on "go" => :build
 
   def install
-    ENV["GOPATH"] = buildpath
-    arch = Hardware::CPU.is_64_bit? ? "amd64" : "x86"
-    dir = buildpath/"src/github.com/wallix/awless"
-    dir.install buildpath.children - [buildpath/".brew_home"]
+    system "go", "build", *std_go_args(ldflags: "-s -w"), "-tags", "extended"
+  
+    # Install bash completion
+    output = Utils.popen_read("#{bin}/awless completion bash")
+    (bash_completion/"awless").write output
 
-    cd dir do
-      # Make binary
-      system "go", "run", "release.go", "-tag", "v#{version}", "-brew", "-arch", "#{arch}", "-os", "darwin"
-      bin.install "awless"
-
-      # Install bash completion
-      output = Utils.popen_read("#{bin}/awless completion bash")
-      (bash_completion/"awless").write output
-
-      # Install zsh completion
-      output = Utils.popen_read("#{bin}/awless completion zsh")
-      (zsh_completion/"_awless").write output
+    # Install zsh completion
+    output = Utils.popen_read("#{bin}/awless completion zsh")
+    (zsh_completion/"_awless").write output
     end
   end
 
